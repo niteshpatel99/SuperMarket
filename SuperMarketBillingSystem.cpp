@@ -40,7 +40,8 @@ void shopping :: menu(){
     cout<<"\t\t\t\t\t       3) Exit             \n";
     cout<<"\t\t\t\t\t                           \n";
 
-    cout<<"\n\t\t\t     Please Select!";
+    cout<<"\n\t\t\t     Please Select! ";
+     cout<<"\n\t\t\t     his is a message ";
     cin>>choice;
 
     switch(choice){
