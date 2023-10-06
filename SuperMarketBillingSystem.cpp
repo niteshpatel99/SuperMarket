@@ -19,7 +19,7 @@ class shopping{
         void list();
         void receipt();
 };
-
+//adding the comment to test
 void shopping :: menu(){
     m:
     int choice;
