@@ -54,7 +54,7 @@ void shopping :: menu(){
             cout<<"\t\t\t  Enter Password  \n";
             cin>>password;
 
-            if(email =="niteshpatel@gmail.com" && password =="niteshpatel"){
+            if(email =="np@gmail.com" && password =="nitesh"){
                     administrator();
             }else{
                 cout<<"Invalid email/password";
@@ -80,7 +80,7 @@ void shopping :: menu(){
 void shopping :: administrator(){
     m:
     int choice;
-    cout<<"\n\n\n\t\t\t     Administrator menu ";
+    cout<<"\n\n\n\t\t\t     Administrator menu \n";
     cout<<"\n\t\t\t|_____1)Add the product__________|";
     cout<<"\n\t\t\t|                                |";
     cout<<"\n\t\t\t|_____2)Modify the product_______|";
@@ -89,7 +89,7 @@ void shopping :: administrator(){
     cout<<"\n\t\t\t|                                |";
     cout<<"\n\t\t\t|_____4)Back to ain Menu ________|";
 
-    cout<<"\n\t\t\  Please enter your choice";
+    cout<<"\n\t\t\t  Please enter your choice";
     cin>>choice;
 
     switch(choice){
@@ -124,7 +124,7 @@ void shopping::buyer(){
     cout<<"                    ";
     cout<<"\t\t\t 1) Buy Product  \n";
     cout<<"                    ";
-    cout<<"\t\t\t 1) GO Back \n";
+    cout<<"\t\t\t 2) GO Back \n";
     cout<<"                    ";
     cout<<"\t\t\t Enter your choice :";
 
@@ -156,7 +156,7 @@ void shopping::add(){
     string n;
 
     cout<<"\n\n\t\t\t Add new product ";
-    cout<<"\n\n\t Product code og the profuct ";
+    cout<<"\n\n\t Product code of the profuct ";
     cin>>pcode;
 
     cout<<"\n\n\t Name of the product ";
@@ -308,7 +308,7 @@ void shopping::receipt(){
     fstream data;
     int arrCodes[100];
     int arrQuantity[100];
-    char choise;
+    char choice;
     int counter =0;
     float amount=0;
     float dis =0;
@@ -341,10 +341,10 @@ void shopping::receipt(){
             }
             counter++;
             cout<<"\n\n Do you want to buy another Product? if yes then press y else n";
-            cin>>choise;
-        }while(choise == 'y');
+            cin>>choice;
+        }while(choice == 'y');
         cout<<"\n\n\t\t\t___________________Receipt__________\n";
-        cout<<"\nProduct No\t Product Name \t Product Quantity \t Price \tAmount with Discount\n";
+        cout<<"\nProduct No\t Product Name \t Product Quantity \t Price \tAmount\t\tAmount with Discount\n";
 
         for(int i=0;i<counter;i++){
             data.open("database.txt",ios::in);
@@ -353,7 +353,7 @@ void shopping::receipt(){
                 if(arrCodes[i]==pcode){
                     amount = price*arrQuantity[i];
                     dis = amount - (amount*dis/100);
-                    total =amount + dis;
+                    total =total + dis;
                     cout<<"\n"<<pcode<<"\t\t"<<pname<<"\t\t"<<arrQuantity[i]<<"\t\t"<<price<<"\t\t"<<amount<<"\t\t"<<dis;
                 }
                 data>>pcode>>pname>>price>>dis;
@@ -369,5 +369,4 @@ void shopping::receipt(){
 int main(){
     shopping s;
     s.menu();
-    return 0;
 }
