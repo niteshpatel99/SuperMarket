@@ -175,19 +175,35 @@ void shopping::add(){
         data<<" "<<pcode<<" "<<pname<<" "<<price<<" "<<dis<<"\n";
         data.close();
     }else{
-        data>>c>>n>>p>>d;
+        
         while(!data.eof()){
+        	data>>c>>n>>p>>d;
             if(c == pcode){
-                token++;
+            	token++;
+//                cout<<"product already exist\n";
+//                n:
+//				cout<<"Do you want to modify records Y/N: ";
+//                char choice;
+//                switch (choice){
+//					case 'Y':
+//						edit();
+//						break;
+//					case 'N':
+//						menu();
+//						break;
+//					default:
+//						cout<<"\n Wrong choice\n";
+//						goto n;
+//				}
+				
+                
             }
-            data>>c>>n>>p>>d;
         }
         data.close();
-    
-
-    if(token ==1)
+        
+        if(token==1)
         goto m;
-    else{
+    	else{
         data.open("database.txt",ios::app| ios ::out);
         data<<" "<<pcode<<" "<<pname<<" "<<price<<" "<<dis<<"\n";
         data.close();
@@ -369,4 +385,5 @@ void shopping::receipt(){
 int main(){
     shopping s;
     s.menu();
+    return 0;
 }
