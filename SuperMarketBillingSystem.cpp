@@ -31,7 +31,7 @@ class shopping{
         void rem();
         void list();
         void receipt();
-        void reset_password();
+        void reset_password(int count);
 };
 
 
@@ -62,9 +62,9 @@ void shopping :: menu(){
     switch(choice){
         case 1:
             cout<<"\t\t\t Please Login  \n";
-            cout<<"\t\t\t  Enter Email  \n";
+            cout<<"\t\t\t  Enter Email : ";
             cin>>email;
-            cout<<"\t\t\t  Enter Password  \n";
+            cout<<"\t\t\t  Enter Password : ";
             cin>>password;
 
             if(email ==admin_email && password ==admin_password){
@@ -75,7 +75,9 @@ void shopping :: menu(){
                 char reset_choice;
                 cin >> reset_choice;
                 if (reset_choice == 'y') {
-                    reset_password();
+                	int count =0;
+                	
+                    reset_password(count);
                 }
             }
             break;
@@ -170,7 +172,7 @@ void shopping::buyer(){
 }
 
 
-void shopping::reset_password() {
+void shopping::reset_password(int count) {
     string phone;
     cout << "\n\nEnter your registered phone number: ";
     cin >> phone;
@@ -187,7 +189,16 @@ void shopping::reset_password() {
         admin_password = new_password;
         cout << "\nEmail and Password has been reset successfully.\n";
     } else {
-        cout << "\nIncorrect phone number.\n";
+        
+        count++;
+        if(count<3){
+        	cout << "\nIncorrect phone number {Remaining chance "<<3-count<< " }.";
+        	 reset_password(count);
+		}else{
+			cout<<endl<<" Limit exceeded! ,Try after some time "<<endl;
+		}
+       
+        
     }
 }
 
@@ -333,13 +344,13 @@ void shopping :: rem(){
 void shopping::list(){
     fstream data;
     data.open("database.txt",ios::in);
-    cout<<"\n|______________________________________|\n";
-    cout<<"ProNo\t\tName\t\tPrice";
-    cout<<"\n|______________________________________|\n";
+    cout<<"\n|______________________________________________________________|\n";
+    cout<<"ProNo\t\tName\t\tPrice\t\tDiscount(%)";
+    cout<<"\n|______________________________________________________________|\n";
     data>>pcode>>pname>>price>>dis;
     while(!data.eof()){
 
-        cout<<pcode<<setw(20)<<setiosflags(ios::right)<<pname<<setw(20)<<price<<"\n";
+        cout<<pcode<<setw(20)<<setiosflags(ios::right)<<pname<<setw(20)<<price<<setw(20)<<dis<<"\n";
         data>>pcode>>pname>>price>>dis;
 
     }
@@ -386,6 +397,13 @@ void shopping::receipt() {
         counter++;
         cout << "\n\n Do you want to buy another Product? if yes then press y else n: ";
         cin >> choice;
+        if(choice == 'y' || choice == 'n'){
+        	continue;
+		}else{
+			cout<<" Either choose  'y' or 'n' "<<endl;
+			cout<<"Enter your choice again : ";
+			cin>>choice;
+		}
     } while (choice == 'y');
 
     cout << "\n\n\t\t\t___________________Receipt__________\n";
